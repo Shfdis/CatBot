@@ -6,7 +6,7 @@ class Test(Test_I):
         m = int(f.readline())
         stats = {}
         for i in range(m):
-            stat, points = map(str,f.readline().split())
+            stat, points = map(str,f.readline().strip('\n').split())
             points = int(points)
             stats.update({stat:points})
         return stats
@@ -15,7 +15,7 @@ class Test(Test_I):
         n = int(f.readline())
         answers = []
         for i in range(n):
-            anstext = f.readline()
+            anstext = f.readline().strip('\n')
             answers.append(Answer(anstext,self.input_stats(f)))
         return answers
     
@@ -23,7 +23,7 @@ class Test(Test_I):
         amount = int(f.readline())
         questions = []
         for i in range(amount):
-            questext = f.readline()
+            questext = f.readline().strip('\n')
             questions.append(Question(questext,self.input_answers(f)))
         return questions
     
@@ -31,15 +31,15 @@ class Test(Test_I):
         k = int(f.readline())
         cats = []
         for i in range(k):
-            name = f.readline()
-            description = f.readline()
-            photo = f.readline()
+            name = f.readline().strip('\n')
+            description = f.readline().strip('\n')
+            photo = f.readline().strip('\n')
             cats.append(Cat(name, description, photo, self.input_stats(f)))
         return cats
 
     def __init__(self):
         f = open(r'Catques.txt')
-        self.disclaimer = f.readline()
+        self.disclaimer = f.readline().strip('\n')
         self.questions = self.input_questions(f)
         self.cats = self.input_cats(f)
 
