@@ -36,6 +36,17 @@ class Test(Test_I):
             photo = f.readline().strip('\n')
             cats.append(Cat(name, description, photo, self.input_stats(f)))
         return cats
+    
+    def results(self, cat):
+        dist = 0
+        user_stats = {}
+        for i in self.user_answers:
+            for j in i.stats:
+                user_stats[j] += i.stats[j]
+        for i in cat.stats:
+            sum = abs(user_stats[i]- cat.stats[i])**2
+            dist += sum
+        return dist
 
     def __init__(self):
         f = open(r'Catques.txt')
@@ -55,6 +66,15 @@ class Test(Test_I):
         for i in self.questions[self.numberques].answers:
             if i.ans == answer:
                 self.user_answers.append(i)
+                self.numberques += 1
                 return True
         return False
+    
+    def end(self) -> Cat:
+        comp = 10**9
+        for i in self.cats:
+            if comp > self.results(i):
+                comp = self.results(i)
+                name_cat = i
+        return name_cat
     
