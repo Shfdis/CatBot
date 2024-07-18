@@ -44,12 +44,12 @@ class Test(Test_I):
             for j in i.stats:
                 user_stats[j] += i.stats[j]
         for i in cat.stats:
-            sum = abs(user_stats[i]- cat.stats[i])**2
+            sum = (user_stats[i]- cat.stats[i])**2
             dist += sum
         return dist
 
     def __init__(self):
-        f = open(r'Catques.txt')
+        f = open(r'Catques.txt',encoding='utf-8')
         self.disclaimer = f.readline().strip('\n')
         self.questions = self.input_questions(f)
         self.cats = self.input_cats(f)
