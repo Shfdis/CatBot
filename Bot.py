@@ -4,7 +4,7 @@ from QuizInterface import *
 from Question import *
 from Cat import *
 from input import *
-token = '6771976303:AAHU8hmeaCXjBAr21OrV5OaETi6TmeCcqAQ'
+token = '7042114271:AAEQ-ZkpDUL3vnDVQhq6CH27AF3jnGxswrc'
 bot = telebot.TeleBot(token)
 stage = {}
 tests = {}
