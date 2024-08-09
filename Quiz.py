@@ -47,6 +47,11 @@ class Test(Test_I):
                 return True
         return False
     
+def return_ques(self):
+    self.user_answers.pop()
+    self.numberques -= 1
+    return self.questions[self.numberques]
+    
     def end(self) -> Cat:
         comp = 10**100
         for i in self.cats:

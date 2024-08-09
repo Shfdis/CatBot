@@ -9,5 +9,7 @@ class Test_I:
         pass
     def get_answer(self, answer) -> bool:
         pass
+    def return_ques(self):
+        pass
     def end(self):
         pass

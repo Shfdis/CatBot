@@ -62,6 +62,9 @@ def get_text_messages(message):
                 for i in quest.answers:
                     button = telebot.types.KeyboardButton(text = i.ans)
                     keyboard.row(button)
+                if stage[message.from_user.id] > 0:
+                    button = telebot.types.KeyboardButton(text = "назад")
+                    keyboard.row(button)
                 bot.send_message(message.from_user.id, quest.ques, reply_markup=keyboard)
             else:
                 Lui = tests[message.from_user.id].end()
@@ -71,6 +74,18 @@ def get_text_messages(message):
                 bot.send_message(message.from_user.id, Lui.name + '\n' + Lui.description, reply_markup=keyboard)
                 bot.send_photo(message.from_user.id, Lui.photo)
                 stage[message.from_user.id] = -2
+        elif message.text == 'назад':
+            tests[message.from_user.id].return_ques()
+            quest = tests[message.from_user.id].ask_question()
+            keyboard = telebot.types.ReplyKeyboardMarkup()
+            for i in quest.answers:
+                button = telebot.types.KeyboardButton(text = i.ans)
+                keyboard.row(button)
+            if stage[message.from_user.id] > 1:
+                button = telebot.types.KeyboardButton(text = "назад")
+                keyboard.row(button)
+            stage[message.from_user.id] -= 1
+            bot.send_message(message.from_user.id, quest.ques, reply_markup=keyboard)
         else:
             keyboard = telebot.types.ReplyKeyboardMarkup()
             bot.send_message(message.from_user.id, "Очепятка, попробуйте ещё раз", reply_markup=keyboard)
